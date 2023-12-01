@@ -19,9 +19,6 @@ let part1 = lines
 
 printfn $"Part 1: %A{part1}"
 
-let numericalDigits = [|"1"; "2"; "3"; "4"; "5"; "6"; "7"; "8"; "9";|]
-let wordDigits =  [|"one"; "two"; "three"; "four"; "five"; "six"; "seven"; "eight"; "nine"|]
-
 let numMap = [
     ("1", 1);
     ("2", 2);
