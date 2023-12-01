@@ -22,40 +22,47 @@ printfn $"Part 1: %A{part1}"
 let numericalDigits = [|"1"; "2"; "3"; "4"; "5"; "6"; "7"; "8"; "9";|]
 let wordDigits =  [|"one"; "two"; "three"; "four"; "five"; "six"; "seven"; "eight"; "nine"|]
 
-let rec findDigits (line: string) (result: List<string>) : List<string> =
+let numMap = [
+    ("1", 1);
+    ("2", 2);
+    ("3", 3);
+    ("4", 4);
+    ("5", 5);
+    ("6", 6);
+    ("7", 7);
+    ("8", 8);
+    ("9", 9);
+    ("one", 1);
+    ("two", 2);
+    ("three", 3);
+    ("four", 4);
+    ("five", 5);
+    ("six", 6);
+    ("seven", 7);
+    ("eight", 8);
+    ("nine", 9) ] |> Map.ofList
+
+let rec findDigits (line: string) (result: List<int>) : List<int> =
+    
+    let digit = Seq.tryFind (fun (x:string) -> line.StartsWith x) numMap.Keys
+    
     match line with
     | "" -> result
-    | _ when Array.exists (fun (x:string) -> line.StartsWith x) numericalDigits ->
-        findDigits (line.Substring(1)) (result @ [Array.find(fun (x:string) -> line.StartsWith x) numericalDigits])
-    | line when Array.exists (fun (x:string) -> line.StartsWith x) wordDigits -> 
-        findDigits (line.Substring(1)) (result @ [Array.find(fun (x:string) -> line.StartsWith x) wordDigits])
+    | _ when digit.IsSome -> findDigits (line.Substring(1)) (result @ [numMap.[digit.Value]])
     | _ -> findDigits (line.Substring(1)) result
+    
         
 let getDigits line =
     findDigits line []
     
-let convertToNumber (digit: string) =
-    let wordDigit = Array.tryFindIndex (fun (x:string) -> x = digit) wordDigits
-    let numericalDigit = Array.tryFindIndex (fun (x:string) -> x = digit) numericalDigits
-    
-    if wordDigit.IsSome then
-        wordDigit.Value + 1
-    else
-        numericalDigit.Value + 1    
-        
-    
-    
-let firstAndLastDigit (digits: string list) =
-    let first = digits |> List.head |> convertToNumber 
-    let last = digits |> List.last |> convertToNumber
-    (first, last)
     
 let lines2 = System.IO.File.ReadLines("input2")
 let part2 = lines2
                     |> Seq.map getDigits
-                    |> Seq.map firstAndLastDigit
-                    |> Seq.map (fun (x,y) -> x*10 + y)
+                    |> Seq.map (fun x -> (List.head x, List.last x))
+                    |> Seq.map (fun (x, y) -> x * 10 + y)
                     |> Seq.sum
+                    
 
 printfn $"Part 2: %A{part2}"
 
