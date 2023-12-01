@@ -48,14 +48,13 @@ let convertToNumber (digit: string) =
 let firstAndLastDigit (digits: string list) =
     let first = digits |> List.head |> convertToNumber 
     let last = digits |> List.last |> convertToNumber
-    first * 10 + last
+    (first, last)
     
-let digits = getDigits "1dfsgdtwodkfgj321six394875six" |> firstAndLastDigit
-
 let lines2 = System.IO.File.ReadLines("input2")
 let part2 = lines2
                     |> Seq.map getDigits
                     |> Seq.map firstAndLastDigit
+                    |> Seq.map (fun (x,y) -> x*10 + y)
                     |> Seq.sum
 
 printfn $"Part 2: %A{part2}"
@@ -63,7 +62,6 @@ printfn $"Part 2: %A{part2}"
      
         
                  
-
                  
 
 
