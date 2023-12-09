@@ -142,19 +142,14 @@ let handComparer2(c: CardAndBid) (c2: CardAndBid) =
     let h1 = c |> toStrength2 |> typeValue
     let h2 = c2 |> toStrength2 |> typeValue
     
-    try 
-        if h1 = h2 then
-            let value = Array.zip (c.hand.ToCharArray()) (c2.hand.ToCharArray())
-                      |> Array.map(fun (c1, c2) -> cardStrength2 c1 - cardStrength2 c2)
-                      |> Array.filter(fun x -> x <> 0)
-                      |> Array.tryHead
-            value |> Option.defaultValue 0
-        else
-            h1 - h2
-    with
-    | :? System.Exception as ex -> 
-        printfn "%A %A" c c2
-        failwith "sdfsfd"
+    if h1 = h2 then
+        let value = Array.zip (c.hand.ToCharArray()) (c2.hand.ToCharArray())
+                  |> Array.map(fun (c1, c2) -> cardStrength2 c1 - cardStrength2 c2)
+                  |> Array.filter(fun x -> x <> 0)
+                  |> Array.tryHead
+        value |> Option.defaultValue 0
+    else
+        h1 - h2
     
 
 
