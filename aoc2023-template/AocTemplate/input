@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Me",
+  "classifications": [ "Common", "Console" ],
+  "identity": "Advent of code 2023",
+  "name": "Example templates: async project",
+  "shortName": "aoc",
+  "sourceName":"ExampleTemplate.AsyncProject",
+  "tags": {
+    "language": "F#",
+    "type": "project"
+  }
+}

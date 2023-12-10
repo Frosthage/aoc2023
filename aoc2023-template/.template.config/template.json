@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Me",
+  "classifications": [
+    "Common",
+    "Console"
+  ],
+  "identity": "AocTemplate",
+  "name": "Advent of code template",
+  "shortName": "aoc",
+  "sourceName": "AocTemplate",
+  "tags": {
+    "language": "F#",
+    "type": "project"
+  }
+}
